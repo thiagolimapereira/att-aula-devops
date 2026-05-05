@@ -7,25 +7,28 @@ class TestSistemaAcademico(unittest.TestCase):
         self.sistema = SistemaAcademico()
 
     def test_calcular_media(self):
-        # Deve retornar 8.0
         self.assertEqual(self.sistema.calcular_media([8, 8, 8]), 8.0, "Erro: O cálculo da média está incorreto.")
 
     def test_verificar_aprovacao_limite(self):
-        # Aluno com média 6.0 e 75% de presença deve ser aprovado
         self.assertEqual(self.sistema.verificar_aprovacao(6.0, 75), "Aprovado", "Erro: Regra de aprovação falhou no limite da nota/frequência.")
         
     def test_verificar_reprovacao_frequencia(self):
-        # Aluno com média 10, mas 74% de presença, deve reprovar
         self.assertEqual(self.sistema.verificar_aprovacao(10.0, 74), "Reprovado", "Erro: Regra de aprovação falhou na frequência.")
 
     def test_registro_presenca(self):
-        # Valida se o trio preencheu o arquivo de presença
-        with open("presenca_trio.json", "r") as f:
-            dados = json.load(f)
+        # Lê o novo arquivo de presença como uma lista
+        try:
+            with open("presenca.json", "r", encoding="utf-8") as f:
+                dados = json.load(f)
+        except FileNotFoundError:
+            self.fail("Erro: Arquivo presenca.json não encontrado. Você renomeou ou apagou o arquivo?")
         
-        for chave, valor in dados.items():
-            self.assertNotEqual(valor, "NOME_AQUI", f"Erro: O trio esqueceu de preencher o {chave} no arquivo JSON.")
-            self.assertTrue(len(valor.strip()) > 0, "Erro: O nome não pode estar vazio.")
+        self.assertIsInstance(dados, list, "Erro: O arquivo JSON deve conter uma lista de nomes ex: [\"Nome 1\", \"Nome 2\"].")
+        self.assertTrue(len(dados) > 0, "Erro: A lista de presença não pode estar vazia.")
+
+        for nome in dados:
+            self.assertNotEqual(nome, "NOME_AQUI", "Erro: Substitua 'NOME_AQUI' pelos nomes reais dos integrantes.")
+            self.assertTrue(len(nome.strip()) > 0, "Erro: O nome não pode ficar em branco.")
 
 if __name__ == '__main__':
     unittest.main()

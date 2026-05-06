@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  validar_trio_e_codigo:
+  validar_codigo:
     runs-on: ubuntu-latest
     steps:
     - name: Baixar o código
@@ -17,5 +17,7 @@ jobs:
       with:
         python-version: '3.10'
         
-    - name: Rodar a bateria de testes
-      run: python -m unittest test_sistema.py
+    - name: Executar bateria de testes oculta
+      run: |
+        echo "aW1wb3J0IHVuaXR0ZXN0CmZyb20gc2lzdGVtYV9hY2FkZW1pY28gaW1wb3J0IFNpc3RlbWFBY2FkZW1pY28KCgpjbGFzcyBUZXN0U2lzdGVtYUFjYWRlbWljbyh1bml0dGVzdC5UZXN0Q2FzZSk6CiAgICBkZWYgc2V0VXAoc2VsZik6CiAgICAgICAgc2VsZi5zaXN0ZW1hID0gU2lzdGVtYUFjYWRlbWljbygpCgogICAgZGVmIHRlc3RfY2FsY3VsYXJfbWVkaWEoc2VsZik6CiAgICAgICAgc2VsZi5hc3NlcnRFcXVhbChzZWxmLnNpc3RlbWEuY2FsY3VsYXJfbWVkaWEoWzgsIDgsIDhdKSwgOC4wKQoKICAgIGRlZiB0ZXN0X3ZlcmlmaWNhcl9hcHJvdmFjYW9fbGltaXRlKHNlbGYpOgogICAgICAgIHNlbGYuYXNzZXJ0RXF1YWwoc2VsZi5zaXN0ZW1hLnZlcmlmaWNhcl9hcHJvdmFjYW8oNi4wLCA3NSksICJBcHJvdmFkbyIpCiAgICAgICAgCiAgICBkZWYgdGVzdF92ZXJpZmljYXJfcmVwcm92YWNhb19mcmVxdWVuY2lhKHNlbGYpOgogICAgICAgIHNlbGYuYXNzZXJ0RXF1YWwoc2VsZi5zaXN0ZW1hLnZlcmlmaWNhcl9hcHJvdmFjYW8oMTAuMCwgNzQpLCAiUmVwcm92YWRvIikKCiAgICBkZWYgdGVzdF9jYWxjdWxhcl9mcmVxdWVuY2lhKHNlbGYpOgogICAgICAgIHNlbGYuYXNzZXJ0RXF1YWwoc2VsZi5zaXN0ZW1hLmNhbGN1bGFyX2ZyZXF1ZW5jaWEoNDAsIDEwKSwgNzUuMCkKCmlmIF9fbmFtZV9fID09ICdfX21haW5fXyc6CiAgICB1bml0dGVzdC5tYWluKCk=" | base64 -d > test_secreto.py
+        python -m unittest test_secreto.py

@@ -35,7 +35,7 @@ class SistemaAcademico:
         return sum(notas) / (len(notas)) 
 
     def verificar_aprovacao(self, media, frequencia):
-        if media >= 6.0 and frequencia >= 70:
+        if media >= 6.0 and frequencia >= 75:
             return "Aprovado"
         return "Reprovado"
 
